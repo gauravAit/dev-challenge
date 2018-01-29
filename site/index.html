@@ -1,0 +1,104 @@
+<html>
+<head>
+    <!--
+    This is the library that provides websocket streaming pub/sub
+    The dev serverver is serving the html and javascript, but it also provides updating fx data on /fx/prices.
+     -->
+    <script src="stomp.js"></script>
+    <script src="sparkline.js"></script>
+</head>
+<body>
+
+<!-- This is a description of what you should do for this task.  You can remove it for your answer -->
+<section class="content">
+    <h1>Currency Exchange Live</h1>
+</section>
+  <table class="pricing-table">
+    <thead class="currency-row">
+        <tr>
+            <th>Pair</th>
+            <th>Best Bid</th>
+            <th>Best Ask</th>
+            <th>Open Bid</th>
+            <th>Open Ask</th>
+            <th>Last Ch. Ask</th>
+            <th>Last Ch. Bid</th>
+            <th>Last 30 seconds Change</th>
+        </tr>
+    </thead>
+    <tbody id="currencies-body">
+    </tbody>
+  </table>
+
+  <h5 class="graph-head">Graph help</h5>
+  <div class="reading-graph-guide">
+    <div class="dot-desc">
+        <span class="dot red"></span>
+        Maximum Value
+    </div>
+    <div class="dot-desc">
+        <span class="dot blue"></span>
+        Current Value
+    </div>    
+    <div class="dot-desc">
+        <span class="dot green"></span>
+        Minimum Value
+    </div>    
+    <div class="dot-desc">
+        <span class="dot orange"></span>
+        Oldest Value
+    </div>
+  </div>
+
+
+
+
+<div class="extra-info">
+    <section>
+        <h5>
+            Following are points I have considered to do the task and do certain modifications accordingly
+        </h5>
+        <ul>
+            <li>
+                From the node server I am sendinng data every 3 seconds instead of 1, to allow user to hover over graph to have look at values before table updates again
+            </li>
+    
+            <li>
+                I have written basic tests for a couple of data prepation functions.  Please run "npm test" from root of this project. For testing I have added an additional testing framefork called "mocha".
+            </li>
+        </ul>
+    </section>
+            
+    <section>
+        <h5>Approach</h5>
+        <li>
+            I am maintaining the currencies list at the client side which remain sorted throughout.
+        </li>
+    
+        <li>
+            Whenever I get new exchange data from socket, I prepare the currency object which can be used properly and update the sorted list.
+            Then, I filter the graph values from currencies which are older than 30 seconds from crrent time.
+            And Finaly I update the UI table with newly available data.
+        </li>
+    </section>
+            
+            
+    <section>
+        <h5>My details</h5>
+        <li>
+            Name: Gaurav Saraswat
+        </li>
+    
+        <li>
+            Email: saraswat.ait@gmail.com
+        </li>
+    </section>
+
+</div>
+
+<!-- Code you write in index.js and anything it depends on will be bundled into bundle.js and
+     is included here -->
+<script src="bundle.js"></script>
+
+</body>
+</html>
